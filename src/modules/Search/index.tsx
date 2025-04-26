@@ -1,5 +1,10 @@
 import React from "react";
 import Stack from "@/components/Stack";
+import SearchInput from "@/components/SearchInput";
 export default function Search() {
-  return <Stack className="h-10 shrink-0">Search</Stack>;
+  return (
+    <Stack className="shrink-0">
+      <SearchInput />
+    </Stack>
+  );
 }
