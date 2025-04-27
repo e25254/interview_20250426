@@ -51,3 +51,7 @@ body {
 .scrollbarHide::-webkit-scrollbar {
   display: none; /* Chrome, Safari and Opera */
 }
+
+.two-line-ellipsis {
+  @apply line-clamp-2 max-h-[2.5em] leading-tight overflow-hidden text-ellipsis;
+}
