@@ -12,7 +12,7 @@ export default function SearchInput() {
     handleInputChange,
   } = useSearchInput();
   return (
-    <Stack className="w-full justify-center items-center py-2 px-hor-container">
+    <Stack className="w-full justify-center items-center">
       <input
         type="text"
         className="w-full bg-gray-300 rounded-sm text-xs py-2 px-2 focus-visible:outline-none caret-gray-500"

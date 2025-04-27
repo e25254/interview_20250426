@@ -3,10 +3,12 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --text-tiny: 0.625rem;
   --color-font: #222222;
+  --color-gray-100: #f9f9f9;
   --color-gray-300: #e4e5e6;
   --color-gray-500: #949494;
-  --spacing-hor-container: 12px;
+  --spacing-hor-container: 1rem;
 }
 
 @theme inline {
@@ -14,7 +16,9 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --text-tiny: var(--text-tiny);
   --color-font: var(--color-font);
+  --color-gray-100: var(--color-gray-100);
   --color-gray-300: var(--color-gray-300);
   --color-gray-500: var(--color-gray-500);
   --spacing-hor-container: var(--spacing-hor-container);
