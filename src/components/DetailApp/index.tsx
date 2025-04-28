@@ -19,9 +19,11 @@ export default function DetailApp({ index }: DetailAppProps) {
           </h5>
           <Stack className="gap-2">
             <h5 className="text-xs text-gray-500 font-bold">導航</h5>
-            <Stack className="flex-row ">
+            <Stack className="flex-row">
               <RatingStar total={5} rating={3} />
-              <span className="text-[.5rem] text-gray-500">(70)</span>
+              <span className="text-[.5rem] text-gray-500 font-bold">
+                （70）
+              </span>
             </Stack>
           </Stack>
         </Stack>

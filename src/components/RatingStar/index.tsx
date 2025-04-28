@@ -16,7 +16,7 @@ export default function RatingStar({ total = 5, rating = 3 }: RatingStarProps) {
       {ratingList.map((value, index) => (
         <Stack
           key={index}
-          className="w-2.5 aspect-square justify-center items-center"
+          className="w-3 aspect-square justify-center items-center"
         >
           {value === 1 ? (
             <FilledStarIcon color="var(--color-yellow-500)" />
