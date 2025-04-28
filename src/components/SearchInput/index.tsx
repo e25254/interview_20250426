@@ -24,7 +24,7 @@ export default function SearchInput() {
       {isShowPlaceholder && (
         <Stack className="gap-1.5 absolute pointer-events-none text-sm flex-row">
           <Stack className="h-5 aspect-square">
-            <Search fill="var(--color-gray-500)" />
+            <Search color="var(--color-gray-500)" />
           </Stack>
           <span className="whitespace-nowrap text-gray-500 font-bold">
             搜尋

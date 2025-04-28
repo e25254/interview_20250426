@@ -4,11 +4,14 @@
   --background: #ffffff;
   --foreground: #171717;
   --text-tiny: 0.625rem;
+  --color-black-100: #666666;
   --color-black-300: #444444;
   --color-black-500: #222222;
   --color-gray-100: #f9f9f9;
   --color-gray-300: #e4e5e6;
+  --color-gray-400: #aaaaaa;
   --color-gray-500: #949494;
+  --color-yellow-500: #ff9504;
   --spacing-hor-container: 1rem;
 }
 
@@ -18,11 +21,14 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --text-tiny: var(--text-tiny);
+  --color-black-100: var(--color-black-100);
   --color-black-300: var(--color-black-300);
   --color-black-500: var(--color-black-500);
   --color-gray-100: var(--color-gray-100);
   --color-gray-300: var(--color-gray-300);
+  --color-gray-400: var(--color-gray-400);
   --color-gray-500: var(--color-gray-500);
+  --color-yellow-500: var(--color-yellow-500);
   --spacing-hor-container: var(--spacing-hor-container);
 }
 
@@ -39,7 +45,7 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
   div {
-    /* outline: 0.1px solid red; */
+    /* outline: 0.1px solid cornflowerblue; */
   }
 }
 
