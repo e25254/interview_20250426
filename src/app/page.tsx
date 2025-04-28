@@ -1,17 +1,20 @@
 import Stack from "@/components/Stack";
 import Search from "@/modules/Search";
 import Recommend from "@/modules/Recommend";
-import List from "@/modules/List";
 import Divider from "@/components/Divider";
-
-export default function Home() {
+import TopFreeAppList from "@/containers/TopFreeAppList";
+import { GET as getTopFreeAppList } from "./api/topfreeapp/route";
+import type { TopFreeAppListType } from "@/types/topFreeApp";
+export default async function Home() {
+  const response = await getTopFreeAppList();
+  const data: TopFreeAppListType[] = await response.json();
   return (
     <Stack className="min-h-screen">
       <Search />
       <Divider />
       <Recommend />
       <Divider />
-      <List />
+      <TopFreeAppList listData={data} />
     </Stack>
   );
 }

@@ -7,8 +7,8 @@ interface HttpProps {
 
 export const newHttpInstance = ({ method, url }: HttpProps): AxiosInstance => {
   const option = {
-    method: method,
-    baseURL: url,
+    method,
+    url,
     headers: {
       "Content-Type": "application/json",
       charset: "UTF-8",

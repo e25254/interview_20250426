@@ -2,10 +2,16 @@ import React, { Fragment } from "react";
 import Stack from "@/components/Stack";
 import DetailApp from "@/components/DetailApp";
 import Divider from "@/components/Divider";
-export default function List() {
+import type { TopFreeAppListType } from "@/types/topFreeApp";
+
+interface ListProps {
+  listData: TopFreeAppListType[];
+}
+
+export default function List({ listData = [] }: ListProps) {
   return (
     <Stack className="px-hor-container pr-0">
-      {Array.from({ length: 10 }).map((_, index) => (
+      {listData.map((_, index) => (
         <Fragment key={index}>
           {index > 0 && <Divider />}
           <DetailApp index={index} />
