@@ -14,7 +14,7 @@ export default function List({ listData = [] }: ListProps) {
       {listData.map((_, index) => (
         <Fragment key={index}>
           {index > 0 && <Divider />}
-          <DetailApp index={index} />
+          <DetailApp index={index} appData={listData[index]} />
         </Fragment>
       ))}
     </Stack>

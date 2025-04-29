@@ -30,4 +30,6 @@ export interface TopFreeAppListType {
   title: string;
   image: string;
   category: string;
+  totalRating?: number;
+  rating?: number;
 }

@@ -11,7 +11,6 @@ export async function GET() {
     const response = await axios.get(
       "https://itunes.apple.com/tw/rss/topfreeapplications/limit=100/json"
     );
-
     const data: TopFreeAppResponseType[] = response?.data?.feed?.entry || [];
     const result: TopFreeAppListType[] = data.map(
       (item: TopFreeAppResponseType) => {
@@ -25,7 +24,6 @@ export async function GET() {
         };
       }
     );
-
     return NextResponse.json(result);
   } catch (error) {
     console.error("Error fetching iTunes data:", error);

@@ -3,7 +3,7 @@ import Stack from "../Stack";
 import FilledStarIcon from "../icon/FilledStarIcon";
 import EmptyStarIcon from "../icon/EmptyStarIcon";
 interface RatingStarProps {
-  total: number;
+  total?: number;
   rating: number;
 }
 
