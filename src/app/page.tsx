@@ -7,14 +7,14 @@ import { getPrefetchTopFreeAppList } from "./utils";
 export const revalidate = 1;
 
 export default async function Home() {
-  const { detailedApps } = await getPrefetchTopFreeAppList();
+  const { detailedApps, totalData } = await getPrefetchTopFreeAppList();
   return (
     <Stack className="min-h-screen">
       <Search />
       <Divider />
       <Recommend />
       <Divider />
-      <TopFreeAppList prefetchData={detailedApps} />
+      <TopFreeAppList prefetchData={detailedApps} totalData={totalData} />
     </Stack>
   );
 }

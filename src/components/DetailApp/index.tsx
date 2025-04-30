@@ -1,4 +1,5 @@
-import React from "react";
+import React, { memo } from "react";
+import Image from "next/image";
 import Stack from "../Stack";
 import RatingStar from "../RatingStar";
 import type { TopFreeAppListType } from "@/types/topFreeApp";
@@ -7,15 +8,23 @@ interface DetailAppProps {
   appData: TopFreeAppListType;
 }
 
-export default function DetailApp({ index, appData }: DetailAppProps) {
-  const { name = "", category = "", rating = 0, totalRating = 0 } = appData;
+export default memo(function DetailApp({ index, appData }: DetailAppProps) {
+  const {
+    name = "",
+    category = "",
+    rating = 0,
+    totalRating = 0,
+    image = "",
+  } = appData;
   return (
     <Stack className="flex-row py-2.5 ">
       <Stack className="justify-center items-center">
         <h5 className="text-xl text-gray-400 min-w-[2em]">{index + 1}</h5>
       </Stack>
       <Stack className="flex-row gap-3 grow">
-        <Stack className="w-[70px] shrink-0 aspect-square rounded-full bg-gray-500" />
+        <Stack className="w-[70px] shrink-0 aspect-square rounded-full bg-gray-500 overflow-hidden">
+          <Image src={image} alt={name} width={70} height={70} />
+        </Stack>
         <Stack className="pt-1.5 pb-0.5 grow gap-1.5">
           <h5 className="text-sm font-bold text-black-300 overflow-hidden text-ellipsis line-clamp-1">
             {name}
@@ -33,4 +42,4 @@ export default function DetailApp({ index, appData }: DetailAppProps) {
       </Stack>
     </Stack>
   );
-}
+});

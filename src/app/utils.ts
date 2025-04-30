@@ -4,6 +4,7 @@ import { getAppDetails } from "./api/applookup/utils";
 
 export const getPrefetchTopFreeAppList: () => Promise<{
   detailedApps: TopFreeAppListType[];
+  totalData: TopFreeAppListType[];
 }> = async () => {
   const response = await GETTopFreeAppList();
   const resJson: TopFreeAppListType[] = await response.json();
@@ -21,5 +22,5 @@ export const getPrefetchTopFreeAppList: () => Promise<{
       };
     })
   );
-  return { detailedApps };
+  return { detailedApps, totalData: resJson };
 };

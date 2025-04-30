@@ -23,6 +23,13 @@ export interface TopFreeAppResponseType {
   };
 }
 
+export interface AppDetailsResponseType {
+  results: {
+    userRatingCount: number;
+    averageUserRating: number;
+  }[];
+}
+
 export interface TopFreeAppListType {
   id: string;
   name: string;

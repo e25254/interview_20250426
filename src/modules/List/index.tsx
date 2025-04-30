@@ -11,8 +11,8 @@ interface ListProps {
 export default function List({ listData = [] }: ListProps) {
   return (
     <Stack className="px-hor-container pr-0">
-      {listData.map((_, index) => (
-        <Fragment key={index}>
+      {listData.map((appData, index) => (
+        <Fragment key={`${appData.id}-${index}`}>
           {index > 0 && <Divider />}
           <DetailApp index={index} appData={listData[index]} />
         </Fragment>
