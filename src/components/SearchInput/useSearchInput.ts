@@ -1,14 +1,16 @@
 import { useCallback, useMemo, useState } from "react";
 
-export default function useSearchInput() {
-  const [inputValue, setInputValue] = useState("");
+export default function useSearchInput(
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
+  value = ""
+) {
   const [isFocused, setIsFocused] = useState(false);
 
   const handleInputChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      setInputValue(e.target.value);
+      onChange(e);
     },
-    []
+    [onChange]
   );
 
   const showPlaceholder = useCallback(() => {
@@ -20,15 +22,14 @@ export default function useSearchInput() {
   }, []);
 
   const shouldShowPlaceholder = useMemo(
-    () => !isFocused && inputValue === "",
-    [isFocused, inputValue]
+    () => !isFocused && value === "",
+    [isFocused, value]
   );
 
   return {
     isShowPlaceholder: shouldShowPlaceholder,
     showPlaceholder,
     hidePlaceholder,
-    inputValue,
     handleInputChange,
   };
 }

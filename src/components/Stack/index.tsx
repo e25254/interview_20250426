@@ -11,7 +11,7 @@ const Stack = forwardRef(function Stack(
   ref: React.Ref<HTMLDivElement>
 ) {
   return (
-    <div ref={ref} className={`flex flex-col ${className}`}>
+    <div ref={ref} className={`flex flex-col ${className}`} tabIndex={0}>
       {children}
     </div>
   );

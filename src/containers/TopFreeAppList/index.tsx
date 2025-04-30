@@ -5,30 +5,25 @@ import useTopFreeAppList from "./useTopFreeAppList";
 import useInfinitScroll from "@/hooks/useInfinitScroll";
 import type { TopFreeAppListType } from "@/types/topFreeApp";
 import Stack from "@/components/Stack";
-import Skeleton from "@/components/Skeleton";
 
 interface TopFreeAppListProps {
   prefetchData: TopFreeAppListType[];
-  totalData: TopFreeAppListType[];
 }
 
-export default function TopFreeAppList({
-  prefetchData,
-  totalData,
-}: TopFreeAppListProps) {
-  const { renderData, isLoading, hasMore, handleLoadMore } = useTopFreeAppList(
-    prefetchData,
-    totalData
-  );
-
-  const loaderRef = useInfinitScroll(handleLoadMore, isLoading);
-
+export default function TopFreeAppList({ prefetchData }: TopFreeAppListProps) {
+  const { renderData, addRenderPage, searchTerm } =
+    useTopFreeAppList(prefetchData);
+  const loaderRef = useInfinitScroll(addRenderPage);
   return (
     <>
-      <List listData={renderData} />
-      {hasMore && (
-        <Stack ref={loaderRef} className="px-hor-container py-2">
-          {isLoading && <Skeleton />}
+      {renderData.length > 0 ? (
+        <>
+          <List listData={renderData} />
+          <Stack ref={loaderRef} className="px-hor-container " />
+        </>
+      ) : (
+        <Stack className="px-hor-container py-2 text-gray-500 justify-center items-center">
+          {searchTerm ? "無搜尋結果" : "無資料"}
         </Stack>
       )}
     </>

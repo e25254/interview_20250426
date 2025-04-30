@@ -1,16 +1,15 @@
 import type { TopFreeAppListType } from "@/types/topFreeApp";
 import { GET as GETTopFreeAppList } from "./api/topfreeapp/route";
+import { GET as GETTopGrossingAppList } from "./api/topgrossingapp/route";
 import { getAppDetails } from "./api/applookup/utils";
 
 export const getPrefetchTopFreeAppList: () => Promise<{
   detailedApps: TopFreeAppListType[];
-  totalData: TopFreeAppListType[];
 }> = async () => {
   const response = await GETTopFreeAppList();
   const resJson: TopFreeAppListType[] = await response.json();
-  const firstTenData = resJson.slice(0, 10);
   const detailedApps = await Promise.all(
-    firstTenData.map(async (item) => {
+    resJson.map(async (item) => {
       const response = await getAppDetails(item.id);
       const {
         results: [{ userRatingCount = 0, averageUserRating = 0 }],
@@ -22,5 +21,13 @@ export const getPrefetchTopFreeAppList: () => Promise<{
       };
     })
   );
-  return { detailedApps, totalData: resJson };
+  return { detailedApps };
+};
+
+export const getPrefetchRecommendAppList: () => Promise<{
+  recommendApps: TopFreeAppListType[];
+}> = async () => {
+  const response = await GETTopGrossingAppList();
+  const resJson: TopFreeAppListType[] = await response.json();
+  return { recommendApps: resJson };
 };

@@ -17,7 +17,7 @@ export default memo(function DetailApp({ index, appData }: DetailAppProps) {
     image = "",
   } = appData;
   return (
-    <Stack className="flex-row py-2.5 ">
+    <Stack className="flex-row py-2.5 cursor-pointer hover:bg-gray-100 active:bg-gray-100">
       <Stack className="justify-center items-center">
         <h5 className="text-xl text-gray-400 min-w-[2em]">{index + 1}</h5>
       </Stack>

@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, forwardRef } from "react";
 import Stack from "@/components/Stack";
 import DetailApp from "@/components/DetailApp";
 import Divider from "@/components/Divider";
@@ -8,9 +8,9 @@ interface ListProps {
   listData: TopFreeAppListType[];
 }
 
-export default function List({ listData = [] }: ListProps) {
+const List = forwardRef<HTMLDivElement, ListProps>(({ listData = [] }, ref) => {
   return (
-    <Stack className="px-hor-container pr-0">
+    <Stack className="px-hor-container pr-0" ref={ref}>
       {listData.map((appData, index) => (
         <Fragment key={`${appData.id}-${index}`}>
           {index > 0 && <Divider />}
@@ -19,4 +19,8 @@ export default function List({ listData = [] }: ListProps) {
       ))}
     </Stack>
   );
-}
+});
+
+List.displayName = "List";
+
+export default List;

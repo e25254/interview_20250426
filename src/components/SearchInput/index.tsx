@@ -3,14 +3,17 @@ import React from "react";
 import Stack from "../Stack";
 import Search from "../icon/SearchIcon";
 import useSearchInput from "./useSearchInput";
-export default function SearchInput() {
+interface SearchInputProps {
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  value: string;
+}
+export default function SearchInput({ onChange, value }: SearchInputProps) {
   const {
     isShowPlaceholder,
     showPlaceholder,
     hidePlaceholder,
-    inputValue,
     handleInputChange,
-  } = useSearchInput();
+  } = useSearchInput(onChange, value);
   return (
     <Stack className="w-full justify-center items-center">
       <input
@@ -18,7 +21,7 @@ export default function SearchInput() {
         className="w-full bg-gray-300 rounded-sm text-xs py-2 px-2 focus-visible:outline-none caret-gray-500"
         onFocus={hidePlaceholder}
         onBlur={showPlaceholder}
-        value={inputValue}
+        value={value}
         onChange={handleInputChange}
       />
       {isShowPlaceholder && (

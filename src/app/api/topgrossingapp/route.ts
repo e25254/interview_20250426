@@ -9,7 +9,7 @@ import type {
 export async function GET() {
   try {
     const response = await axios.get(
-      "https://itunes.apple.com/tw/rss/topfreeapplications/limit=100/json"
+      "https://itunes.apple.com/tw/rss/topgrossingapplications/limit=10/json"
     );
     const data: ItunesAppResponseType[] = response?.data?.feed?.entry || [];
     const result: TopFreeAppListType[] = data.map(

@@ -1,20 +1,24 @@
 import Stack from "@/components/Stack";
 import Search from "@/modules/Search";
-import Recommend from "@/modules/Recommend";
 import Divider from "@/components/Divider";
 import TopFreeAppList from "@/containers/TopFreeAppList";
-import { getPrefetchTopFreeAppList } from "./utils";
+import {
+  getPrefetchRecommendAppList,
+  getPrefetchTopFreeAppList,
+} from "./utils";
+import TopGrossingAppList from "@/containers/TopGrossingAppList";
 export const revalidate = 1;
 
 export default async function Home() {
-  const { detailedApps, totalData } = await getPrefetchTopFreeAppList();
+  const { detailedApps } = await getPrefetchTopFreeAppList();
+  const { recommendApps } = await getPrefetchRecommendAppList();
   return (
     <Stack className="min-h-screen">
       <Search />
       <Divider />
-      <Recommend />
+      <TopGrossingAppList prefetchData={recommendApps} />
       <Divider />
-      <TopFreeAppList prefetchData={detailedApps} totalData={totalData} />
+      <TopFreeAppList prefetchData={detailedApps} />
     </Stack>
   );
 }

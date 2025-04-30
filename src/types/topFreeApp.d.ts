@@ -1,4 +1,4 @@
-export interface TopFreeAppResponseType {
+export interface ItunesAppResponseType {
   "im:name": {
     label: string;
   };
