@@ -23,6 +23,11 @@ export default function SearchInput({ onChange, value }: SearchInputProps) {
         onBlur={showPlaceholder}
         value={value}
         onChange={handleInputChange}
+        autoComplete="off"
+        autoCorrect="off"
+        autoCapitalize="off"
+        spellCheck="false"
+        inputMode="search"
       />
       {isShowPlaceholder && (
         <Stack className="gap-1.5 absolute pointer-events-none text-sm flex-row">
