@@ -138,9 +138,13 @@ docker run -p 3000:3000 e25254/intervie_20250426:v1.0.0
 
 本專案具有以下技術實現：
 
-- **Tailwind CSS**：採用 Tailwind CSS 作為 UI 框架，實現響應式設計和組件化開發
-- **伺服器端渲染與資料預載**：透過 Next.js 伺服器端預先載入列表資料，大幅提升初次渲染速度與使用者體驗
-- **SEO 優化**：透過 SSR 預渲染技術，在首次加載時預先加載前 10 筆資料，改善搜尋引擎索引效果
-- **Intersection Observer API**：使用現代瀏覽器 API 實現高效的無限滾動，避免傳統 scroll 事件的效能問題
-- **Redux Toolkit**：採用 Redux 官方推薦的 toolkit 管理全局狀態，具有嚴謹的類型定義
-- **模組化架構**：依照功能將代碼分為 components、containers、modules 等層級，提高可維護性
+## 技術實作亮點
+
+- **Tailwind CSS**：採用 Tailwind CSS 作為 UI 框架，實現響應式設計和組件化開發，確保跨裝置的一致視覺體驗
+- **伺服器端渲染與資料預載**：透過 Next.js 伺服器端預先載入列表資料，大幅提升初次渲染速度與使用者體驗，減少頁面閃爍現象
+- **SEO 優化**：透過 SSR 預渲染技術，在首次加載時預先加載前 10 筆資料，改善搜尋引擎索引效果，提升網站能見度
+- **Intersection Observer API**：使用現代瀏覽器 API 實現高效的無限滾動，避免傳統 scroll 事件的效能問題，提供流暢的使用者體驗
+- **Redux Toolkit**：採用 Redux 官方推薦的 toolkit 管理全局狀態，具有嚴謹的類型定義，確保狀態管理的可預測性和安全性
+- **模組化架構**：依照功能將代碼分為 components、containers、modules 等層級，提高可維護性和可擴展性
+- **TanStack Query 狀態管理**：採用 useQuery 優化 API 請求生命週期管理，實現智能快取、背景資料更新與失敗重試機制，降低網路請求負擔並提升使用者體驗
+- **效能最佳化策略**：針對使用者交互實作 throttle 與 debounce 控制機制，在無限滾動與搜尋功能中有效防止頻繁 API 請求，大幅降低伺服器負載並優化前端渲染效能
