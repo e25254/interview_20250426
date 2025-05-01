@@ -1,7 +1,7 @@
 import Stack from "@/components/Stack";
-import Search from "@/modules/Search";
 import Divider from "@/components/Divider";
 import TopFreeAppList from "@/containers/TopFreeAppList";
+import AppSearch from "@/containers/AppSearch";
 import {
   getPrefetchRecommendAppList,
   getPrefetchAllTopFreeApp,
@@ -20,7 +20,7 @@ export default async function Home() {
   return (
     <ReactQueryProviders>
       <Stack className="min-h-screen">
-        <Search />
+        <AppSearch />
         <Divider />
         <TopGrossingAppList prefetchData={recommendApps} />
         <Divider />
