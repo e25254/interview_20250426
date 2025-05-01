@@ -1,19 +1,34 @@
 import type { TopFreeAppListType } from "@/types/topFreeApp";
-import { GET as GETTopFreeAppList } from "./api/topfreeapp/route";
-import { GET as GETTopGrossingAppList } from "./api/topgrossingapp/route";
-import { getAppDetails } from "./api/applookup/utils";
+import { GET as GETTopFreeAppList } from "@/app/api/topfreeapp/route";
+import { GET as GETTopGrossingAppList } from "@/app/api/topgrossingapp/route";
+import { getAppDetails } from "@/libs/api";
 
-export const getPrefetchTopFreeAppList: () => Promise<{
-  detailedApps: TopFreeAppListType[];
-}> = async () => {
+export const getPrefetchAllTopFreeApp: () => Promise<
+  TopFreeAppListType[]
+> = async () => {
   const response = await GETTopFreeAppList();
   const resJson: TopFreeAppListType[] = await response.json();
-  const detailedApps = await Promise.all(
-    resJson.map(async (item) => {
-      const response = await getAppDetails(item.id);
+  return resJson;
+};
+
+export const getPrefetchRecommendAppList: () => Promise<
+  TopFreeAppListType[]
+> = async () => {
+  const response = await GETTopGrossingAppList();
+  const resJson: TopFreeAppListType[] = await response.json();
+  return resJson;
+};
+
+export const twoSideFetch = async (
+  allData: TopFreeAppListType[],
+  page = 1
+): Promise<TopFreeAppListType[]> => {
+  const scope = allData.slice(page * 10 - 10, page * 10);
+  const data = await Promise.all(
+    scope.map(async (item) => {
       const {
         results: [{ userRatingCount = 0, averageUserRating = 0 }],
-      } = await response.json();
+      } = await getAppDetails(item.id);
       return {
         ...item,
         totalRating: userRatingCount,
@@ -21,13 +36,6 @@ export const getPrefetchTopFreeAppList: () => Promise<{
       };
     })
   );
-  return { detailedApps };
-};
 
-export const getPrefetchRecommendAppList: () => Promise<{
-  recommendApps: TopFreeAppListType[];
-}> = async () => {
-  const response = await GETTopGrossingAppList();
-  const resJson: TopFreeAppListType[] = await response.json();
-  return { recommendApps: resJson };
+  return data;
 };

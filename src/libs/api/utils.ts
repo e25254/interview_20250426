@@ -11,6 +11,14 @@ interface RequestOptions {
   headers?: Record<string, string>;
 }
 
+const getBaseUrl = () => {
+  if (typeof window === "undefined") {
+    return process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3000";
+  } else {
+    return "";
+  }
+};
+
 export const handleRequestError = (error: unknown, url: string) => {
   if (axios.isAxiosError(error)) {
     const axiosError = error as AxiosError;
@@ -42,6 +50,7 @@ export const newHttpInstance = ({
 } => {
   // 創建基本配置，但不使用實際的 axios.create 和攔截器
   const baseConfig: AxiosRequestConfig = {
+    baseURL: getBaseUrl(),
     method,
     url,
     headers: {
