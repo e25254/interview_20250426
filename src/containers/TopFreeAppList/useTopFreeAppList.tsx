@@ -2,7 +2,7 @@ import { useMemo, useState, useEffect, useCallback, useRef } from "react";
 import type { TopFreeAppListType } from "@/types/topFreeApp";
 import { useAppSelector } from "@/store";
 import { useQuery } from "@tanstack/react-query";
-import { twoSideFetch } from "@/app/utils";
+import { clientFetchAppDetails } from "@/app/utils";
 import { matchArray } from "@/libs/constant";
 export default function useTopFreeAppList(
   prefetchRenderData: TopFreeAppListType[],
@@ -35,7 +35,7 @@ export default function useTopFreeAppList(
 
   const { data: appDetails = [], isLoading } = useQuery({
     queryKey: ["topFreeAppList", matchAllData, renderPage],
-    queryFn: () => twoSideFetch(matchAllData, renderPage),
+    queryFn: () => clientFetchAppDetails(matchAllData, renderPage),
     staleTime: 5000,
     initialData: renderPage === 1 && !searchTerm ? queryInitialData : undefined,
   });

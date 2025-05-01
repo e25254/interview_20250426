@@ -1,7 +1,8 @@
 import type { TopFreeAppListType } from "@/types/topFreeApp";
 import { GET as GETTopFreeAppList } from "@/app/api/topfreeapp/route";
 import { GET as GETTopGrossingAppList } from "@/app/api/topgrossingapp/route";
-import { getAppDetails } from "@/libs/api";
+import { getAppDetails as clientGetAppDetails } from "@/libs/api";
+import { getAppDetails as serverGetAppDetails } from "@/app/api/applookup/utils";
 
 export const getPrefetchAllTopFreeApp: () => Promise<
   TopFreeAppListType[]
@@ -19,7 +20,7 @@ export const getPrefetchRecommendAppList: () => Promise<
   return resJson;
 };
 
-export const twoSideFetch = async (
+export const clientFetchAppDetails = async (
   allData: TopFreeAppListType[],
   page = 1
 ): Promise<TopFreeAppListType[]> => {
@@ -28,7 +29,7 @@ export const twoSideFetch = async (
     scope.map(async (item) => {
       const {
         results: [{ userRatingCount = 0, averageUserRating = 0 }],
-      } = await getAppDetails(item.id);
+      } = await clientGetAppDetails(item.id);
       return {
         ...item,
         totalRating: userRatingCount,
@@ -37,5 +38,23 @@ export const twoSideFetch = async (
     })
   );
 
+  return data;
+};
+
+export const serverFetchAppDetails = async (allData: TopFreeAppListType[]) => {
+  const data = await Promise.all(
+    allData.slice(0, 10).map(async (item) => {
+      const response = await serverGetAppDetails(item.id);
+      const resJson = await response.json();
+      const {
+        results: [{ userRatingCount = 0, averageUserRating = 0 }],
+      } = resJson;
+      return {
+        ...item,
+        totalRating: userRatingCount,
+        rating: Math.floor(averageUserRating),
+      };
+    })
+  );
   return data;
 };
