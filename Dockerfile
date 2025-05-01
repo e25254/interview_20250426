@@ -11,6 +11,8 @@ RUN npm ci
 # Copy the rest of the application
 COPY . .
 
+RUN if [ ! -f .env.production ]; then cp env.example .env.production; fi
+
 # Build the application
 ENV NODE_ENV=production
 RUN npm run build
@@ -31,7 +33,7 @@ RUN npm ci --only=production
 COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/next.config.js ./next.config.js
-
+COPY --from=builder /app/.env.production ./.env.production
 # Expose the port the app will run on
 EXPOSE 3000
 

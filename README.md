@@ -59,37 +59,11 @@ cp env.example .env.production
 
    打開瀏覽器訪問 [http://localhost:3000](http://localhost:3000)
 
-#### 其他 Docker 命令
-
-- **在後台運行容器**
-
-  ```bash
-  docker run -d -p 3000:3000 interview-app
-  ```
-
-- **查看運行中的容器**
-
-  ```bash
-  docker ps
-  ```
-
-- **停止容器**
-
-  ```bash
-  docker stop <container_id>
-  ```
-
-- **重新構建（不使用緩存）**
-
-  ```bash
-  docker build --no-cache -t interview-app .
-  ```
-
 ### 不使用 Docker 啟動
 
 #### 前提條件
 
-- 已安裝 [Node.js](https://nodejs.org/) (推薦使用 v20.x)
+- 已安裝 [Node.js](https://nodejs.org/) (版本為`v22.9.0`)
 - 已安裝 npm (通常隨 Node.js 一起安裝)
 
 #### 開發環境
@@ -145,7 +119,7 @@ cp env.example .env.production
 本專案具有以下技術實現：
 
 - **Tailwind CSS**：採用 Tailwind CSS 作為 UI 框架，實現響應式設計和組件化開發
-- **伺服器端資料緩存**：將 API 資料存儲在 Next.js 伺服器端，減少重複請求並提升資料獲取效率
+- **伺服器端渲染與資料預載**：透過 Next.js 伺服器端預先載入列表資料，大幅提升初次渲染速度與使用者體驗
 - **SEO 優化**：透過 SSR 預渲染技術，在首次加載時預先加載前 10 筆資料，改善搜尋引擎索引效果
 - **Intersection Observer API**：使用現代瀏覽器 API 實現高效的無限滾動，避免傳統 scroll 事件的效能問題
 - **Redux Toolkit**：採用 Redux 官方推薦的 toolkit 管理全局狀態，具有嚴謹的類型定義
