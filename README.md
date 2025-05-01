@@ -2,6 +2,12 @@
 
 這是一個使用 [Next.js](https://nextjs.org) 建立的專案，使用 [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app) 引導。
 
+## 線上演示
+
+本專案已部署在 GCP 上，您可以通過以下網址訪問：
+
+[https://interview20250426.jerryjie.online/](https://interview20250426.jerryjie.online/)
+
 ## 環境變量配置
 
 本專案使用環境變量來配置 API 基礎 URL。請按照以下步驟設置：
@@ -41,7 +47,21 @@ cp env.example .env.production
 
 - 已安裝 [Docker](https://www.docker.com/get-started)
 
-#### 步驟
+#### 從 Docker Hub 拉取映像
+
+您可以直接從 Docker Hub 拉取預構建的映像：
+
+```bash
+docker pull e25254/intervie_20250426:v1.0.0
+```
+
+然後運行容器：
+
+```bash
+docker run -p 3000:3000 e25254/intervie_20250426:v1.0.0
+```
+
+#### 本地構建映像
 
 1. **構建 Docker 映像**
 
