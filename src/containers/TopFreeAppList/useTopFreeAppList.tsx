@@ -1,4 +1,4 @@
-import { useMemo, useState, useEffect, useCallback, useRef } from "react";
+import { useMemo, useState, useEffect, useCallback } from "react";
 import type { TopFreeAppListType } from "@/types/topFreeApp";
 import { useAppSelector } from "@/store";
 import { useQuery } from "@tanstack/react-query";
@@ -10,14 +10,15 @@ export default function useTopFreeAppList(
 ) {
   const searchTerm = useAppSelector((state) => state.search);
   const [renderPage, setRenderPage] = useState(1);
-  const [renderData, setRenderData] = useState<TopFreeAppListType[]>([]);
-  const lastSearchTerm = useRef(searchTerm);
-  const isSearchTermChanging = useRef(false);
+  const [renderData, setRenderData] = useState<TopFreeAppListType[]>(
+    queryInitialData || []
+  );
 
   const addRenderPage = useCallback(
     () => setRenderPage((prev) => prev + 1),
     []
   );
+
   const matchAllData = useMemo(() => {
     return prefetchRenderData.filter((item) => {
       if (searchTerm) {
@@ -33,6 +34,12 @@ export default function useTopFreeAppList(
     });
   }, [searchTerm, prefetchRenderData]);
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    setRenderPage(1);
+    setRenderData([]);
+  }, [searchTerm]);
+
   const { data: appDetails = [], isLoading } = useQuery({
     queryKey: ["topFreeAppList", matchAllData, renderPage],
     queryFn: () => clientFetchAppDetails(matchAllData, renderPage),
@@ -41,25 +48,14 @@ export default function useTopFreeAppList(
   });
 
   useEffect(() => {
-    if (searchTerm !== lastSearchTerm.current) {
-      isSearchTermChanging.current = true;
-      window.scrollTo({ top: 0, behavior: "smooth" });
-      setRenderData([]);
-      setRenderPage(1);
-    }
-  }, [searchTerm]);
-
-  useEffect(() => {
     if (isLoading) return;
 
-    if (isSearchTermChanging.current) {
-      lastSearchTerm.current = searchTerm;
+    if (renderPage === 1) {
       setRenderData(appDetails);
-      isSearchTermChanging.current = false;
     } else {
       setRenderData((prev) => [...prev, ...appDetails]);
     }
-  }, [appDetails, searchTerm, isLoading]);
+  }, [appDetails, isLoading, renderPage]);
 
   return {
     currentPage: renderPage,
