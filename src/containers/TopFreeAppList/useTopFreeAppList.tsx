@@ -5,7 +5,8 @@ import { useQuery } from "@tanstack/react-query";
 import { twoSideFetch } from "@/app/utils";
 import { matchArray } from "@/libs/constant";
 export default function useTopFreeAppList(
-  prefetchRenderData: TopFreeAppListType[]
+  prefetchRenderData: TopFreeAppListType[],
+  queryInitialData: TopFreeAppListType[]
 ) {
   const searchTerm = useAppSelector((state) => state.search);
   const [renderPage, setRenderPage] = useState(1);
@@ -36,9 +37,9 @@ export default function useTopFreeAppList(
     queryKey: ["topFreeAppList", matchAllData, renderPage],
     queryFn: () => twoSideFetch(matchAllData, renderPage),
     staleTime: 5000,
+    initialData: renderPage === 1 && !searchTerm ? queryInitialData : undefined,
   });
 
-  // 處理搜索詞變化
   useEffect(() => {
     if (searchTerm !== lastSearchTerm.current) {
       isSearchTermChanging.current = true;
@@ -48,7 +49,6 @@ export default function useTopFreeAppList(
     }
   }, [searchTerm]);
 
-  // 處理數據加載完成
   useEffect(() => {
     if (isLoading) return;
 

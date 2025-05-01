@@ -8,6 +8,7 @@ import Stack from "@/components/Stack";
 import Skeleton from "@/components/Skeleton";
 interface TopFreeAppListProps {
   prefetchData: TopFreeAppListType[];
+  queryInitialData: TopFreeAppListType[];
 }
 
 function LoadingSkeleton() {
@@ -18,9 +19,12 @@ function LoadingSkeleton() {
   );
 }
 
-export default function TopFreeAppList({ prefetchData }: TopFreeAppListProps) {
+export default function TopFreeAppList({
+  prefetchData,
+  queryInitialData,
+}: TopFreeAppListProps) {
   const { addRenderPage, searchTerm, renderData, isLoading } =
-    useTopFreeAppList(prefetchData);
+    useTopFreeAppList(prefetchData, queryInitialData);
   const loaderRef = useInfinitScroll(addRenderPage);
 
   return (
@@ -30,7 +34,7 @@ export default function TopFreeAppList({ prefetchData }: TopFreeAppListProps) {
       ) : renderData.length > 0 ? (
         <>
           <List listData={renderData} />
-          <Stack ref={loaderRef} className="px-hor-container" />
+          <Stack ref={loaderRef} className="px-hor-container h-2.5" />
           {isLoading && <LoadingSkeleton />}
         </>
       ) : (
