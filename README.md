@@ -134,9 +134,6 @@ docker run -p 3000:3000 e25254/intervie_20250426:v1.0.0
 
    打開瀏覽器訪問 [http://localhost:3000](http://localhost:3000)
 
-## 專案特點
-
-本專案具有以下技術實現：
 
 ## 技術實作亮點
 
